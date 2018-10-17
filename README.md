@@ -1,0 +1,4 @@
+# Havamal
+
+## Utveckling
+* yarn dev

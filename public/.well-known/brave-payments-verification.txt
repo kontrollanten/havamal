@@ -1,0 +1,4 @@
+This is a Brave Payments publisher verification file.
+
+Domain: havamal.se
+Token: 733822c131c938d81bca494f5d8bbdc2a93de61e16688df5dd26172330abf740

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import App from 'grommet/components/App';
 import Split from 'grommet/components/Split';
@@ -11,6 +12,10 @@ class Main extends Component {
   render() {
     return (
       <App centered={false}>
+        <Helmet>
+          <title>Den höges sång</title>
+          <meta name="description" content="Svensk översättning av Erik Brate, 1913." />
+        </Helmet>
         <Router>
           <Split
             flex='right'

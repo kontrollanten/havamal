@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 import Box from 'grommet/components/Box';
 import Headline from 'grommet/components/Headline';
@@ -27,7 +27,8 @@ class Home extends Component {
 
         {havamalChapters
           .filter(c => !!c.nr)
-          .map(({ nr: number, content }) => <Chapter key={number} content={content} number={number} />
+          .map(({ nr: number, content }) =>
+            <Chapter key={number} content={content} number={number} />
           )}
       </div>
     );

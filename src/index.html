@@ -10,7 +10,9 @@
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="shortcut icon" type="image/png" href="/img/shortcut-icon.png" />
   <link rel="apple-touch-icon" sizes="196x196" type="image/png" href="/img/mobile-app-icon.png">
-  <link rel="stylesheet" type="text/css" href="/index.css">
+	<% for (var file in htmlWebpackPlugin.files.css) { %>
+    <link rel="stylesheet" type="text/css" href="<%= htmlWebpackPlugin.files.css[file] %>">
+	<% } %>
   <style>
     body.loading {margin: 0px; width: 100vw; height: 100vh;
       background-image: radial-gradient(circle at 50% 15%, #fff, #fff 30%, #ccc);
@@ -83,15 +85,17 @@
     }, 100)
     </script>
   </div>
-  <script async src="/index.js"></script>
+	<% for (var file in htmlWebpackPlugin.files.js) { %>
+    <script async src="<%= htmlWebpackPlugin.files.js[file] %>"></script>
+	<% } %>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127635170-1"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= process.env.GA_TRACKING_ID %>"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'UA-127635170-1');
+    gtag('config', '<%= process.env.GA_TRACKING_ID %>');
   </script>
 </body>
 </html>

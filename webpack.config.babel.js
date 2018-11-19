@@ -1,11 +1,16 @@
 import path from 'path';
 import webpack from 'webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const env = process.env.NODE_ENV || 'production';
 
 let plugins = [
   new CopyWebpackPlugin([{ from: './public' }]),
+  new HtmlWebpackPlugin({
+    template: 'src/index.html',
+  }),
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify(env)
@@ -27,26 +32,8 @@ const devConfig = {};
 if (env === 'production') {
   loaderOptionsConfig.minimize = true;
   plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-      },
-      mangle: {
-        screw_ie8: true
-      },
-      output: {
-        comments: false,
-        screw_ie8: true
-      }
+    new webpack.DefinePlugin({
+      'process.env.GA_TRACKING_ID': JSON.stringify(process.env.GA_TRACKING_ID),
     })
   );
 } else {
@@ -69,16 +56,15 @@ if (env === 'production') {
       ignored: /node_modules/
     },
     historyApiFallback: true,
-    proxy: {
-      '/api/*': 'http://localhost:8102'
-    }
   };
 }
 
+plugins.push(new MiniCssExtractPlugin());
 plugins.push(new webpack.LoaderOptionsPlugin(loaderOptionsConfig));
 
 export default Object.assign({
   entry: './src/js/index.js',
+  mode: env,
   output: {
     path: path.resolve('./dist'),
     filename: 'index.js',
@@ -103,7 +89,8 @@ export default Object.assign({
       {
         test: /\.scss$/,
         use: [
-          { loader: 'file-loader', options: { name: '[name].css' } },
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: 'css-loader' },
           { loader: 'sass-loader',
             options: {
               outputStyle: 'compressed',

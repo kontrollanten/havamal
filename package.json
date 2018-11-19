@@ -6,9 +6,11 @@
   "repository": "",
   "license": "",
   "scripts": {
-    "test": "grommet check",
-    "dev": "cross-env NODE_ENV=development grommet pack",
-    "dist": "cross-env NODE_ENV=production grommet pack",
+    "lint": "npm run lint:js && npm run lint:style",
+    "lint:js": "eslint src",
+    "lint:style": "sass-lint --verbose",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress",
+    "dist": "cross-env NODE_ENV=production webpack",
     "start": "npm run dist-server && npm run dist && node ./dist-server/server.js"
   },
   "dependencies": {

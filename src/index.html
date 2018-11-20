@@ -85,9 +85,9 @@
     }, 100)
     </script>
   </div>
-	<% for (var file in htmlWebpackPlugin.files.js) { %>
-    <script async src="<%= htmlWebpackPlugin.files.js[file] %>"></script>
-	<% } %>
+  <% for (var file in htmlWebpackPlugin.files.js) { %>
+    <script class="clientBundle" async src="<%= htmlWebpackPlugin.files.js[file] %>"></script>
+  <% } %>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=<%= process.env.GA_TRACKING_ID %>"></script>
   <script>

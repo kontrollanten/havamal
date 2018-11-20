@@ -10,8 +10,9 @@
     "lint:js": "eslint src",
     "lint:style": "sass-lint --verbose",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress",
-    "dist": "cross-env NODE_ENV=production webpack",
-    "start": "npm run dist-server && npm run dist && node ./dist-server/server.js"
+    "dist": "cross-env NODE_ENV=production webpack && npm run snap",
+    "snap": "react-snap",
+    "start": "serve dist"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -61,9 +62,11 @@
     "nodemon": "^1.11.0",
     "pre-commit": "^1.2.2",
     "react-dev-utils": "^6.1.1",
+    "react-snap": "git://github.com/kontrollanten/react-snap#remove_some_scripts",
     "react-test-renderer": "^15.4.1",
     "sass-lint": "^1.10.2",
     "sass-loader": "^6.0.3",
+    "serve": "^10.1.1",
     "webpack": "^4.26.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
@@ -83,6 +86,12 @@
     "testPathIgnorePatterns": [
       "<rootDir>[/\\\\](dist|templates|node_modules)[/\\\\]"
     ]
+  },
+  "reactSnap": {
+    "removeScriptTags": [
+      ".clientBundle"
+    ],
+    "source": "dist"
   },
   "pre-commit": [
     "test"

@@ -9,6 +9,7 @@ const env = process.env.NODE_ENV || 'production';
 let plugins = [
   new CopyWebpackPlugin([{ from: './public' }]),
   new HtmlWebpackPlugin({
+    inject: false,
     template: 'src/index.html',
   }),
   new webpack.DefinePlugin({

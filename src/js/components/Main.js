@@ -13,7 +13,7 @@ class Main extends Component {
     return (
       <App centered={false}>
         <Helmet>
-          <title>Den höges sång</title>
+          <title>Havamal - Den höges sång</title>
           <meta name='description' content='Svensk översättning av Erik Brate, 1913.' />
         </Helmet>
         <Router>
